@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+    <body>
+    {% for space in spaces %}
+        <div>
+            Name: {{space.name}}
+            Description: {{space.description}}
+            Price per Night: {{space.price_per_night}}
+        </div>
+    {% endfor %}
+    </body>
+</html>

@@ -14,3 +14,11 @@ def test_get_index(page, test_web_address):
 
     # We assert that it has the text "This is the homepage."
     expect(strong_tag).to_have_text("This is the homepage.")
+
+def test_get_list_all(page, test_web_address):
+    page.goto(f"http://{test_web_address}/")
+    div_tags = page.locator("div")
+    expect(div_tags).to_have_text([
+        'Name: test 1\nDescription: This is test 1\nPrice per Night: 10.0',
+        'Name: test 2\nDescription: This is test 2\nPrice per Night: 20.0'
+    ])
