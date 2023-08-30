@@ -1,4 +1,5 @@
 from lib.space import Space
+import datetime
 
 def test_creates_space():
     # Given space data
@@ -22,3 +23,17 @@ def test_outputs_string_when_called():
     # It returns a string when called
     space = Space(1, "Test Space", "Test Description", 10.0, 1)
     assert str(space) == "Space(1, Test Space, Test Description, 10.0, 1)"
+
+def test_create_date_range():
+    # Given a Space object
+    # It creates a range of dates between a given start and end date.
+    space = Space(1, "Test Space", "Test Description", 10.0, 1)
+    start_date = datetime.date(2000,1,1)
+    end_date = datetime.date(2000,1,4)
+    space.dates_generator(start_date, end_date)
+    assert space.available_dates == [
+        datetime.date(2000, 1, 1),
+        datetime.date(2000, 1, 2),
+        datetime.date(2000, 1, 3),
+        datetime.date(2000, 1, 4)
+    ]
