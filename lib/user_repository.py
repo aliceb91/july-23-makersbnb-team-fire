@@ -1,31 +1,31 @@
-from lib.space import Space
+from lib.user import User
 
-class SpaceRepository:
-    # CRUD methods for space class 
+class UserRepository:
+    # CRUD methods for user class 
     def __init__(self, connection):
         # Stores connection object 
         self._connection = connection
 
-    def add(self, space):
-        # Adds space to the database 
-        self._connection.execute("INSERT INTO spaces(name, description, price_per_night) VALUES (%s, %s, %s)",[space.name, space.description, space.price_per_night])
+    def add(self, user):
+        # Adds user to the database 
+        self._connection.execute("INSERT INTO users(name) VALUES (%s)",[user.name])
         return None 
 
     def all(self): 
-        # Gets all spaces from the database 
-        rows = self._connection.execute("SELECT * FROM spaces")
-        spaces = []
+        # Gets all users from the database 
+        rows = self._connection.execute("SELECT * FROM users")
+        users = []
         for row in rows: 
-            space = Space(row['id'], row['name'], row['description'], row['price_per_night'])
-            spaces.append(space)
-        return spaces
+            user = User(row['id'], row['name'])
+            users.append(user)
+        return users
 
-    def update(self, id, space):
-        # Updates and existing space
-        self._connection.execute("UPDATE spaces SET name=%s, description=%s, price_per_night=%s WHERE id=%s", [space.name, space.description, space.price_per_night, id])
+    def update(self, id, user):
+        # Updates and existing user
+        self._connection.execute("UPDATE users SET name=%s WHERE id=%s", [user.name, id])
         return None
 
     def delete(self, id):
-        # Deletes a specified space from the database.
-        self._connection.execute("DELETE FROM spaces WHERE id=%s", [id])
+        # Deletes a specified user from the database.
+        self._connection.execute("DELETE FROM users WHERE id=%s", [id])
         return None
