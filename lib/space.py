@@ -8,6 +8,7 @@ class Space():
         self.price_per_night = price_per_night
         self.user_id = user_id
         self.available_dates = []
+        self.bookings = []
 
     def __eq__(self, other):
         return self.__dict__ == other.__dict__
@@ -18,5 +19,24 @@ class Space():
     def dates_generator(self, start_date, end_date):
         current_date = start_date
         while current_date <= end_date:
-            self.available_dates.append(current_date)
-            current_date += timedelta(days=1)
+            date_taken = False
+            if self.bookings == []:
+                self.available_dates.append(current_date)
+                current_date += timedelta(days=1)
+            else:
+                for booking in self.bookings:
+                    if booking['date'] == current_date:
+                        date_taken = True
+                if date_taken == False:
+                    self.available_dates.append(current_date)
+                    current_date += timedelta(days=1)
+                else:
+                    current_date += timedelta(days=1)
+
+    def make_booking(self, guest_user, date):
+        booking = {
+            "host_user_id": self.user_id,
+            "guest_user_id": guest_user,
+            "date": date
+        }
+        self.bookings.append(booking)

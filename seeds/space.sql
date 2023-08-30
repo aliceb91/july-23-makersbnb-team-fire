@@ -10,5 +10,7 @@ CREATE TABLE spaces(
     user_id int
 );
 
+--Add date list to seed data
+
 INSERT INTO spaces(name, description, price_per_night, user_id) VALUES ('test 1', 'This is test 1', 10.00, 1); 
 INSERT INTO spaces(name, description, price_per_night, user_id) VALUES ('test 2', 'This is test 2', 20.00, 2); 

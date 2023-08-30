@@ -31,3 +31,14 @@ def test_get_space_page(page, test_web_address, db_connection):
     expect(h1_tags).to_have_text('Name: test 1')
     p_tags = page.locator("p")
     expect(p_tags).to_have_text('Description: This is test 1\nPrice per Night: 10.0')
+
+# def test_get_space_page_with_dates(page, test_web_address, db_connection):
+#     # Displays the space page with the current available dates
+#     db_connection.seed('seeds/space.sql')
+#     page.goto(f"http://{test_web_address}/spaces/1")
+#     h1_tags = page.locator("h1")
+#     expect(h1_tags).to_have_text('Name: test 1')
+#     p_tags = page.locator("p")
+#     expect(p_tags).to_have_text('Description: This is test 1\nPrice per Night: 10.0')
+#     ul_tags = page.locator("ul")
+#     expect(ul_tags).to_have_text('01-01-2000\n02-01-2000')

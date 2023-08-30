@@ -7,4 +7,10 @@
         Description: {{space.description}}<br>
         Price per Night: {{space.price_per_night}}
     </p>
+    <div>Available dates:</div>
+    {% for date in space.available_dates %}
+        <ul>
+            {{date}}
+        </ul>
+    {% endfor %}
 </html>
