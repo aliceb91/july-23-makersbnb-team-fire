@@ -20,6 +20,11 @@ class SpaceRepository:
             spaces.append(space)
         return spaces
 
+    def find(self, id):
+        rows = self._connection.execute('SELECT * from spaces WHERE id = %s', [id])
+        row = rows[0]
+        return Space(row['id'], row['name'], row['description'], row['price_per_night'], row['user_id'])
+
     def update(self, id, space):
         # Updates and existing space
         self._connection.execute("UPDATE spaces SET name=%s, description=%s, price_per_night=%s, user_id=%s WHERE id=%s", [space.name, space.description, space.price_per_night, space.user_id, id])

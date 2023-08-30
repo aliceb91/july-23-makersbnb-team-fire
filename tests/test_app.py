@@ -23,3 +23,11 @@ def test_get_list_all(page, test_web_address, db_connection):
         'Name: test 1\nDescription: This is test 1\nPrice per Night: 10.0',
         'Name: test 2\nDescription: This is test 2\nPrice per Night: 20.0'
     ])
+
+def test_get_space_page(page, test_web_address, db_connection):
+    db_connection.seed('seeds/space.sql')
+    page.goto(f"http://{test_web_address}/spaces/1")
+    h1_tags = page.locator("h1")
+    expect(h1_tags).to_have_text('Name: test 1')
+    p_tags = page.locator("p")
+    expect(p_tags).to_have_text('Description: This is test 1\nPrice per Night: 10.0')
