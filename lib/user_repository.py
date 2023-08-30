@@ -20,9 +20,9 @@ class UserRepository:
             users.append(user)
         return users
 
-    def update(self, id, user):
+    def update(self, user):
         # Updates and existing user
-        self._connection.execute("UPDATE users SET name=%s WHERE id=%s", [user.name, id])
+        self._connection.execute("UPDATE users SET name=%s WHERE id=%s", [user.name, user.id])
         return None
 
     def delete(self, id):

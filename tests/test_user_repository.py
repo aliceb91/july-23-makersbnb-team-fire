@@ -13,14 +13,13 @@ def test_get_all(db_connection):
         "User(2, name 2)"
     ]
 
-
-
 def test_update_user(db_connection):
     db_connection.seed("seeds/user.sql")
     repository = UserRepository(db_connection)
     updated_user = Mock()
+    updated_user.id = 2
     updated_user.name = "name 4"
-    repository.update(2, updated_user)
+    repository.update(updated_user)
     users = repository.all()
     result = []
     for user in users:
