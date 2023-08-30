@@ -56,3 +56,9 @@ def test_add_user(db_connection):
         "User(2, name 2)",
         "User(3, name 3)" 
     ]
+
+def test_find_user(db_connection):
+    db_connection.seed("seeds/user.sql")
+    repository = UserRepository(db_connection)
+    user = repository.find(2)
+    assert str(user) == "User(2, name 2)"
