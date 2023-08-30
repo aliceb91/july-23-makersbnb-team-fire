@@ -9,8 +9,8 @@ def test_get_all(db_connection):
     for space in spaces:
         result.append(str(space))
     assert result == [
-        "Space(1, test 1, This is test 1, 10.0)", 
-        "Space(2, test 2, This is test 2, 20.0)"
+        "Space(1, test 1, This is test 1, 10.0, 1)", 
+        "Space(2, test 2, This is test 2, 20.0, 2)"
     ]
 
 
@@ -21,15 +21,16 @@ def test_add_to_database(db_connection):
     space.name = "test 3"
     space.description = "This is test 3"
     space.price_per_night = 30.0
+    space.user_id = 3
     repository.add(space)
     spaces = repository.all()
     result = []
     for space in spaces:
         result.append(str(space))
     assert result == [
-        "Space(1, test 1, This is test 1, 10.0)", 
-        "Space(2, test 2, This is test 2, 20.0)",
-        "Space(3, test 3, This is test 3, 30.0)"
+        "Space(1, test 1, This is test 1, 10.0, 1)", 
+        "Space(2, test 2, This is test 2, 20.0, 2)",
+        "Space(3, test 3, This is test 3, 30.0, 3)"
     ]
 
 def test_update_space(db_connection):
@@ -39,14 +40,15 @@ def test_update_space(db_connection):
     updated_space.name = "test 4"
     updated_space.description = "This is test 4"
     updated_space.price_per_night = 40.0
+    updated_space.user_id = 4
     repository.update(2, updated_space)
     spaces = repository.all()
     result = []
     for space in spaces:
         result.append(str(space))
     assert result == [
-        "Space(1, test 1, This is test 1, 10.0)", 
-        "Space(2, test 4, This is test 4, 40.0)"
+        "Space(1, test 1, This is test 1, 10.0, 1)", 
+        "Space(2, test 4, This is test 4, 40.0, 4)"
     ]
 
 def test_delete_space(db_connection):
@@ -58,5 +60,5 @@ def test_delete_space(db_connection):
     for space in spaces:
         result.append(str(space))
     assert result == [
-        "Space(2, test 2, This is test 2, 20.0)"
+        "Space(2, test 2, This is test 2, 20.0, 2)"
     ]

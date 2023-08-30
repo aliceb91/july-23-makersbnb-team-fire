@@ -15,7 +15,8 @@ def test_get_index(page, test_web_address):
     # We assert that it has the text "This is the homepage."
     expect(strong_tag).to_have_text("This is the homepage.")
 
-def test_get_list_all(page, test_web_address):
+def test_get_list_all(page, test_web_address, db_connection):
+    db_connection.seed('seeds/space.sql')
     page.goto(f"http://{test_web_address}/")
     div_tags = page.locator("div")
     expect(div_tags).to_have_text([
