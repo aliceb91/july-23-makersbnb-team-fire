@@ -13,18 +13,25 @@
         </style>
     </head>
     <body>
-    <h1>
-        Name: {{space.name}}
-    </h1>
-    <p>
-        Description: {{space.description}}<br>
-        Price per Night: {{space.price_per_night}}
-    </p>
-    <div>Available dates:</div>
-    {% for date in space.available_dates %}
-        <ul>
-            {{date}}
-        </ul>
-    {% endfor %}
+        <h1>
+            Name: {{space.name}}
+        </h1>
+        <p>
+            Description: {{space.description}}<br>
+            Price per Night: {{space.price_per_night}}
+        </p>
+        <div>Available dates:</div>
+        {% for date in space.available_dates %}
+            <ul>
+                {{date}}
+            </ul>
+        {% endfor %}
+        <form action="/spaces/{{space.id}}" method="POST">
+            <label for="guest_id">Guest ID:</label><br>
+            <input type="number" id="guest_id" name="guest_id"><br>
+            <label for="date">Date:</label><br>
+            <input type="date" id="date" name="date"><br>
+            <input type="submit" value="Submit">
+        </form>
     </body>
 </html>
