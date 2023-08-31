@@ -24,6 +24,8 @@ def get_space_page(id):
     connection = get_flask_database_connection(app)
     repository = SpaceRepository(connection)
     space = repository.find(id)
+    space.dates_generator(datetime.date(2000, 1, 1),
+        datetime.date(2000, 1, 2))
     return render_template("space_page.html", space=space)
 
 @app.route('/booking_confirmed', methods=['GET'])
@@ -57,6 +59,10 @@ def get_single_user_by_id(id):
     repository = UserRepository(connection)
     user = repository.find(id)
     return render_template('user.html', user=user)
+
+@app.route("/login", methods=["GET"])
+def get_login_page():
+    return render_template('login.html')
 
 # These lines start the server if you run this file directly
 # They also start the server configured to use the test database
