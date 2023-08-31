@@ -1,5 +1,17 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <style type = "text/css">
+            body{
+                background: linear-gradient(to top right, #a24936 0%, #d36135 100%);
+                height: 100%;
+                font-family: 'Montserrat';
+            }
+            html{
+                height: 100%;
+            }
+        </style>
+    </head>
     <body>
     {% for space in spaces %}
         <div>
@@ -7,6 +19,8 @@
             Description: {{space.description}}
             Price per Night: {{space.price_per_night}}
         </div>
+        <button><a href="/spaces/{{space.id}}">Click me to go to space page</a></button>
     {% endfor %}
+    <button><a href="/users/1">Your Profile</a></button>
     </body>
 </html>
