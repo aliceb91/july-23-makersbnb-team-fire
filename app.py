@@ -32,6 +32,14 @@ def get_single_user_by_id(id):
     return render_template('user.html', user=user)
 
 
+@app.route('/spaces/<id>', methods=['GET'])
+def get_single_space_by_id(id):
+    connection = get_flask_database_connection(app)
+    repository = SpaceRepository(connection)
+    space = repository.find(id)
+    return render_template('user.html', space=user)
+
+
 # These lines start the server if you run this file directly
 # They also start the server configured to use the test database
 # if started in test mode.
