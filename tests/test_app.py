@@ -43,3 +43,13 @@ def test_get_space_page(page, test_web_address, db_connection):
 #     ul_tags = page.locator("ul")
 #     expect(ul_tags).to_have_text('01-01-2000\n02-01-2000')
 
+def test_create_new_booking(page, test_web_address, db_connection):
+    page.set_default_timeout(1000)
+    db_connection.seed('seeds/booking.sql')
+    page.goto(f"http://{test_web_address}/spaces/1")
+    page.fill("input[name=guest_id]", "11")
+    page.fill("input[name=date]", "2000-01-01")
+    page.click("text='Submit'")
+    div_tags = page.locator("div")
+    expect(div_tags).to_have_text("Booking confirmed")
+

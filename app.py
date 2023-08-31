@@ -1,9 +1,12 @@
 import os
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect
 from lib.database_connection import get_flask_database_connection
 from lib.space_repository import SpaceRepository
 from lib.user_repository import UserRepository
+from lib.booking import Booking
+from lib.booking_repository import BookingRepository
 import datetime
+
 # Create a new Flask app
 app = Flask(__name__)
 
@@ -25,6 +28,22 @@ def get_space_page(id):
         datetime.date(2000, 1, 2))
     return render_template("space_page.html", space=space)
 
+@app.route('/booking_confirmed', methods=['GET'])
+def booking_confirmed():
+    return render_template("booking_confirmed.html")
+
+@app.route('/spaces/<id>', methods=['POST'])
+def make_space_booking(id):
+    connection = get_flask_database_connection(app)
+    space_repository = SpaceRepository(connection)
+    space = space_repository.find(id)
+    guest_id_string = request.form['guest_id']
+    guest_id = int(guest_id_string)
+    booking = Booking(None, space.user_id, guest_id, space.id, request.form['date'])
+    booking_repository = BookingRepository(connection)
+    booking_repository.add(booking)
+    return redirect("/booking_confirmed")
+
 # GET /index
 # Returns the homepage
 # Try it:
@@ -44,7 +63,6 @@ def get_single_user_by_id(id):
 @app.route("/login", methods=["GET"])
 def get_login_page():
     return render_template('login.html')
-
 
 # These lines start the server if you run this file directly
 # They also start the server configured to use the test database
