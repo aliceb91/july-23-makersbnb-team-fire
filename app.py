@@ -3,6 +3,7 @@ from flask import Flask, request, render_template
 from lib.database_connection import get_flask_database_connection
 from lib.space_repository import SpaceRepository
 from lib.user_repository import UserRepository
+import datetime
 # Create a new Flask app
 app = Flask(__name__)
 
@@ -20,6 +21,8 @@ def get_space_page(id):
     connection = get_flask_database_connection(app)
     repository = SpaceRepository(connection)
     space = repository.find(id)
+    space.dates_generator(datetime.date(2000, 1, 1),
+        datetime.date(2000, 1, 2))
     return render_template("space_page.html", space=space)
 
 # GET /index
