@@ -15,6 +15,13 @@ def get_all_spaces():
     spaces = repository.all()
     return render_template('homepage.html', spaces=spaces)
 
+@app.route('/spaces/<id>', methods=['GET'])
+def get_space_page(id):
+    connection = get_flask_database_connection(app)
+    repository = SpaceRepository(connection)
+    space = repository.find(id)
+    return render_template("space_page.html", space=space)
+
 # GET /index
 # Returns the homepage
 # Try it:
