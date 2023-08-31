@@ -29,3 +29,8 @@ class UserRepository:
         # Deletes a specified user from the database.
         self._connection.execute("DELETE FROM users WHERE id=%s", [id])
         return None
+    
+    def find(self,id):
+        rows = self._connection.execute("SELECT * FROM users WHERE id=%s", [id])
+        row = rows[0]
+        return User(row["id"], row["name"])
