@@ -17,7 +17,7 @@ def test_get_index(page, test_web_address):
 
 def test_get_list_all(page, test_web_address, db_connection):
     db_connection.seed('seeds/space.sql')
-    page.goto(f"http://{test_web_address}/")
+    page.goto(f"http://{test_web_address}/spaces")
     div_tags = page.locator("div")
     expect(div_tags).to_have_text([
         'Name: test 1\nDescription: This is test 1\nPrice per Night: 10.0',
@@ -50,8 +50,8 @@ def test_create_new_booking(page, test_web_address, db_connection):
     page.fill("input[name=guest_id]", "11")
     page.fill("input[name=date]", "2000-01-01")
     page.click("text='Submit'")
-    div_tags = page.locator("div")
-    expect(div_tags).to_have_text("Booking confirmed")
+    h1_tags = page.locator("h1")
+    expect(h1_tags).to_have_text("Booking confirmed")
 
 # def test_login_as_user(page, test_web_address, db_connection):
 #     db_connection.seed('seeds/user.sql')

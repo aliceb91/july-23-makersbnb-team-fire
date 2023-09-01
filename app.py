@@ -12,7 +12,7 @@ app = Flask(__name__)
 
 # == Your Routes Here ==
 
-@app.route('/', methods=['GET'])
+@app.route('/spaces', methods=['GET'])
 def get_all_spaces():
     connection = get_flask_database_connection(app)
     repository = SpaceRepository(connection)
@@ -24,8 +24,7 @@ def get_space_page(id):
     connection = get_flask_database_connection(app)
     repository = SpaceRepository(connection)
     space = repository.find(id)
-    space.dates_generator(datetime.date(2000, 1, 1),
-        datetime.date(2000, 1, 2))
+    space.dates_generator()
     return render_template("space_page.html", space=space)
 
 @app.route('/booking_confirmed', methods=['GET'])

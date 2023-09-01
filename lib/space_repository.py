@@ -23,7 +23,7 @@ class SpaceRepository:
     def find(self, id):
         rows = self._connection.execute('SELECT * from spaces WHERE id = %s', [id])
         row = rows[0]
-        return Space(row['id'], row['name'], row['description'], row['price_per_night'], row['user_id'])
+        return Space(row['id'], row['name'], row['description'], row['price_per_night'], row['start_date'], row['end_date'], row['user_id'])
 
     def update(self, id, space):
         # Updates and existing space

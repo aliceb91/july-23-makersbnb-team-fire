@@ -9,8 +9,7 @@ CREATE TABLE spaces(
     price_per_night float,
     start_date date,
     end_date date,
-    user_id int,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    user_id int
 );
 
 --Add date list to seed data
