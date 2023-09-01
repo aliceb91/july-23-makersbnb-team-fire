@@ -51,7 +51,7 @@ def test_create_new_booking(page, test_web_address, db_connection):
     page.fill("input[name=date]", "2000-01-01")
     page.click("text='Submit'")
     h1_tags = page.locator("h1")
-    expect(h1_tags).to_have_text("Booking confirmed")
+    expect(h1_tags).to_have_text("Booking request sent!")
 
 # def test_login_as_user(page, test_web_address, db_connection):
 #     db_connection.seed('seeds/user.sql')
