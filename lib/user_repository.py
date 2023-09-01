@@ -8,7 +8,7 @@ class UserRepository:
 
     def add(self, user):
         # Adds user to the database 
-        self._connection.execute("INSERT INTO users(name) VALUES (%s)",[user.name])
+        self._connection.execute("INSERT INTO users(name, password) VALUES (%s, %s)",[user.name, user.password])
         return None 
 
     def all(self): 
@@ -16,13 +16,13 @@ class UserRepository:
         rows = self._connection.execute("SELECT * FROM users")
         users = []
         for row in rows: 
-            user = User(row['id'], row['name'])
+            user = User(row['id'], row['name'], row['password'])
             users.append(user)
         return users
 
     def update(self, user):
         # Updates and existing user
-        self._connection.execute("UPDATE users SET name=%s WHERE id=%s", [user.name, user.id])
+        self._connection.execute("UPDATE users SET name=%s, password=%s WHERE id=%s", [user.name, user.password, user.id])
         return None
 
     def delete(self, id):
@@ -30,7 +30,12 @@ class UserRepository:
         self._connection.execute("DELETE FROM users WHERE id=%s", [id])
         return None
     
-    def find(self,id):
+    def find_by_name(self,name):
+        rows = self._connection.execute("SELECT * FROM users WHERE name=%s", [name])
+        row = rows[0]
+        return User(row["id"], row["name"], row['password'])
+
+    def find_by_id(self,id):
         rows = self._connection.execute("SELECT * FROM users WHERE id=%s", [id])
         row = rows[0]
-        return User(row["id"], row["name"])
+        return User(row["id"], row["name"], row['password'])
