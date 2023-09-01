@@ -1,12 +1,14 @@
 from datetime import datetime, timedelta
 
 class Space():
-    def __init__(self, id, name, description, price_per_night, user_id):
+    def __init__(self, id, name, description, price_per_night, start_date, end_date, user_id):
         self.id = id
         self.name = name
         self.description = description
         self.price_per_night = price_per_night
         self.user_id = user_id
+        self.start_date = start_date
+        self.end_date = end_date
         self.available_dates = []
         self.bookings = []
 
@@ -14,11 +16,11 @@ class Space():
         return self.__dict__ == other.__dict__
     
     def __repr__(self):
-        return f"Space({self.id}, {self.name}, {self.description}, {self.price_per_night}, {self.user_id})"
+        return f"Space({self.id}, {self.name}, {self.description}, {self.price_per_night}, {self.start_date}, {self.end_date}, {self.user_id})"
 
-    def dates_generator(self, start_date, end_date):
-        current_date = start_date
-        while current_date <= end_date:
+    def dates_generator(self):
+        current_date = self.start_date
+        while current_date <= self.end_date:
             date_taken = False
             if self.bookings == []:
                 self.available_dates.append(current_date)

@@ -7,10 +7,13 @@ CREATE TABLE spaces(
     name text, 
     description text, 
     price_per_night float,
-    user_id int
+    start_date date,
+    end_date date,
+    user_id int,
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 --Add date list to seed data
 
-INSERT INTO spaces(name, description, price_per_night, user_id) VALUES ('test 1', 'This is test 1', 10.00, 1); 
-INSERT INTO spaces(name, description, price_per_night, user_id) VALUES ('test 2', 'This is test 2', 20.00, 2); 
+INSERT INTO spaces(name, description, price_per_night, start_date, end_date, user_id) VALUES ('test 1', 'This is test 1', 10.00,'2000-01-01', '2000-01-02' 1); 
+INSERT INTO spaces(name, description, price_per_night, start_date, end_date, user_id) VALUES ('test 2', 'This is test 2', 20.00, '2000-01-04', '2000-01-06', 2); 
