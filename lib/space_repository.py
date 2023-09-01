@@ -8,7 +8,7 @@ class SpaceRepository:
 
     def add(self, space):
         # Adds space to the database 
-        self._connection.execute("INSERT INTO spaces(name, description, price_per_night, user_id) VALUES (%s, %s, %s, %s)",[space.name, space.description, space.price_per_night, space.user_id])
+        self._connection.execute("INSERT INTO spaces(name, description, price_per_night, start_date, end_date, user_id) VALUES (%s, %s, %s, %s, %s, %s)",[space.name, space.description, space.price_per_night, space.start_date, space.end_date, space.user_id])
         return None 
 
     def all(self): 
@@ -16,7 +16,7 @@ class SpaceRepository:
         rows = self._connection.execute("SELECT * FROM spaces")
         spaces = []
         for row in rows: 
-            space = Space(row['id'], row['name'], row['description'], row['price_per_night'], row['user_id'])
+            space = Space(row['id'], row['name'], row['description'], row['price_per_night'], row['start_date'], row['end_date'], row['user_id'])
             spaces.append(space)
         return spaces
 
@@ -27,7 +27,7 @@ class SpaceRepository:
 
     def update(self, id, space):
         # Updates and existing space
-        self._connection.execute("UPDATE spaces SET name=%s, description=%s, price_per_night=%s, user_id=%s WHERE id=%s", [space.name, space.description, space.price_per_night, space.user_id, id])
+        self._connection.execute("UPDATE spaces SET name=%s, description=%s, price_per_night=%s,start_date=%s, end_date=%s, user_id=%s WHERE id=%s", [space.name, space.description, space.price_per_night, space.start_date, space.end_date, space.user_id, id])
         return None
 
     def delete(self, id):
