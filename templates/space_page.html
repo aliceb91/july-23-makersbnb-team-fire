@@ -33,7 +33,7 @@
             <label for="guest_id">Guest ID:</label><br>
             <input type="number" id="guest_id" name="guest_id"><br>
             <label for="date">Date:</label><br>
-            <input type="date" id="date" name="date"><br>
+            <input type="date" min={{space.start_date}} max={{space.end_date}} id="date" name="date"><br>
             <input type="submit" value="Submit">
         </form>
     </body>
