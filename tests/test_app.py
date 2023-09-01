@@ -53,3 +53,7 @@ def test_create_new_booking(page, test_web_address, db_connection):
     div_tags = page.locator("div")
     expect(div_tags).to_have_text("Booking confirmed")
 
+# def test_login_as_user(page, test_web_address, db_connection):
+#     db_connection.seed('seeds/user.sql')
+#     page.goto(f"http://{test_web_address}/login")
+#     page.fill("input[username]")

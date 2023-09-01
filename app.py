@@ -44,6 +44,17 @@ def make_space_booking(id):
     booking_repository.add(booking)
     return redirect("/booking_confirmed")
 
+@app.route('/login', methods=['POST'])
+def log_in_user():
+    connection = get_flask_database_connection(app)
+    username = request.form['username']
+    password = request.form['password']
+    repository = UserRepository(connection)
+    target_user = repository.find_by_name(username)
+    target_path = f"/users/{target_user.id}"
+    if target_user.password == password:
+        return redirect(target_path)
+
 # GET /index
 # Returns the homepage
 # Try it:
@@ -57,7 +68,7 @@ def get_index():
 def get_single_user_by_id(id):
     connection = get_flask_database_connection(app)
     repository = UserRepository(connection)
-    user = repository.find(id)
+    user = repository.find_by_id(id)
     return render_template('user.html', user=user)
 
 @app.route("/login", methods=["GET"])
